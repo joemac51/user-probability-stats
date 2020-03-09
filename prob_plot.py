@@ -1,6 +1,23 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from retrieve_user_json import get_json
+import json
+import os
+
+MY_USER_ID = "ed05c06f79baa07b"
+FILE_NUM = 27
+
+def get_json_from_file(file_path: str) -> list:
+    '''Deserializes a JSON file at file_path'''
+
+    if os.path.exists(file_path):
+        with open(file_path, "r") as read_file:
+            data = json.load(read_file)
+
+        return data
+    else:
+        print("File path not found")
+
+        return []
 
 def probs_to_arr(a_list: list) -> np.ndarray:
     '''Appends the probabilities to a numpy array'''
@@ -21,10 +38,10 @@ def plot_probs(arr: np.ndarray) -> plt.figure:
     plt.title(r'Title Probabilities vs. Number of Titles')
     plt.xlabel(r'Title No.')
     plt.ylabel(r'Probabilities')
-    plt.plot(title_num, arr, ls='', marker='o', ms=0.6)
+    plt.plot(title_num, arr, ls='--', lw=0.4, marker='o', ms=0.6)
     plt.show()
 
 if __name__ == "__main__":
-    prob_dict_list = get_json("ed05c06f79baa07b")
+    prob_dict_list = get_json_from_file(f"/Users/daniel/Documents/AREA 22/user-prob-stats/prob_json/{FILE_NUM}.json")
     probabilities = probs_to_arr(prob_dict_list)
     plot_probs(probabilities)

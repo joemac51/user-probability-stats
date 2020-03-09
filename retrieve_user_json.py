@@ -3,6 +3,7 @@ import json
 import sys
 
 FILE_PATH = "/Users/daniel/Documents/AREA 22/user-prob-stats/prob_json"
+MY_USER_ID = "ed05c06f79baa07b"
 
 def get_json(user_id: str) -> list:
     '''Returns a list of dicts containing TMSID and their corresponding probabilities
@@ -24,5 +25,5 @@ def save_json_to_file(user_json: list, file_no: int) -> None:
         json.dump(user_json, write_file)
 
 if __name__ == "__main__":
-    my_json = get_json("7982945C-E25B-46B8-9321-B5770921FA14")
+    my_json = get_json(MY_USER_ID)
     save_json_to_file(my_json, sys.argv[1])

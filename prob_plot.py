@@ -1,21 +1,6 @@
-import requests
 import matplotlib.pyplot as plt
 import numpy as np
-
-def get_json(user_id: str) -> list:
-    '''Returns a list of dicts containing TMSID and their corresponding probabilities
-    for the user's top 1000 of titles'''
-
-    try:
-        r = requests.get(f"http://movie-demo-daniel.davidmcgettigan.com/getlistforusernormnew/{user_id}")
-
-        return r.json()
-    except:
-        print("User not present")
-        
-        return []
-
-prob_dict_list = get_json("ed05c06f79baa07b")
+from retrieve_user_json import get_json
 
 def probs_to_arr(a_list: list) -> np.ndarray:
     '''Appends the probabilities to a numpy array'''
@@ -26,8 +11,6 @@ def probs_to_arr(a_list: list) -> np.ndarray:
         arr = np.append(arr, i["weight"])
 
     return arr
-
-probabilities = probs_to_arr(prob_dict_list)
 
 def plot_probs(arr: np.ndarray) -> plt.figure:
     '''Plots the number of titles (x-axis) vs. the probabilities (y-axis)'''
@@ -42,4 +25,6 @@ def plot_probs(arr: np.ndarray) -> plt.figure:
     plt.show()
 
 if __name__ == "__main__":
+    prob_dict_list = get_json("ed05c06f79baa07b")
+    probabilities = probs_to_arr(prob_dict_list)
     plot_probs(probabilities)

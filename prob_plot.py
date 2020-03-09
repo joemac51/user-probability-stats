@@ -6,9 +6,14 @@ def get_json(user_id: str) -> list:
     '''Returns a list of dicts containing TMSID and their corresponding probabilities
     for the user's top 1000 of titles'''
 
-    r = requests.get(f"http://movie-demo-daniel.davidmcgettigan.com/getlistforusernormnew/{user_id}")
+    try:
+        r = requests.get(f"http://movie-demo-daniel.davidmcgettigan.com/getlistforusernormnew/{user_id}")
 
-    return r.json()
+        return r.json()
+    except:
+        print("User not present")
+        
+        return []
 
 prob_dict_list = get_json("ed05c06f79baa07b")
 
@@ -33,7 +38,7 @@ def plot_probs(arr: np.ndarray) -> plt.figure:
     plt.title(r'Title Probabilities vs. Number of Titles')
     plt.xlabel(r'Title No.')
     plt.ylabel(r'Probabilities')
-    plt.plot(title_num, arr, ls='', marker='o', ms=0.5)
+    plt.plot(title_num, arr, ls='', marker='o', ms=0.6)
     plt.show()
 
 if __name__ == "__main__":

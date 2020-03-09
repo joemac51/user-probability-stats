@@ -1,5 +1,6 @@
 import requests
 import json
+import sys
 
 FILE_PATH = "/Users/daniel/Documents/AREA 22/user-prob-stats/prob_json"
 
@@ -24,4 +25,4 @@ def save_json_to_file(user_json: list, file_no: int) -> None:
 
 if __name__ == "__main__":
     my_json = get_json("7982945C-E25B-46B8-9321-B5770921FA14")
-    save_json_to_file(my_json, 1)
+    save_json_to_file(my_json, sys.argv[1])

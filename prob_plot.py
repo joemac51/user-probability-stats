@@ -42,7 +42,7 @@ def plot_probs(arr: np.ndarray, fig_num: int) -> plt.figure:
     plt.savefig(f"/Users/daniel/Documents/AREA 22/user-prob-stats/figures/{fig_num}", dpi=300, bbox_inches='tight')
 
 if __name__ == "__main__":
-    for i in range(1, 64):
+    for i in range(64, ):
         prob_dict_list = get_json_from_file(f"/Users/daniel/Documents/AREA 22/user-prob-stats/prob_json/{i}.json")
         probabilities = probs_to_arr(prob_dict_list)
         plot_probs(probabilities, i)
